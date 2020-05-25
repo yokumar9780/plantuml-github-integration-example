@@ -1,0 +1,28 @@
+
+@startuml
+header User
+footer Page %page% of %lastpage%
+title Sign in
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 20
+skinparam maxmessagesize 60
+skinparam sequenceParticipant underline
+
+actor User
+participant "GUI" as Gui
+participant "Keycloak" as Keycloak
+database DB
+
+User -> Gui: Sign-in Request
+activate Gui
+Gui -> Keycloak: Redirect
+activate Keycloak
+Keycloak -> Gui: Sign-in Page
+User -> Gui: Provide User details & Submit Request
+Gui -> Keycloak: ValidateUser Request
+Keycloak -> DB: GetUser Request
+DB --> Keycloak: GetUser Response
+Keycloak -> Gui: User token or error 
+deactivate Keycloak
+Gui -> User: Redirect to Landing Page Or error Page
+@enduml
