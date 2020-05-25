@@ -27,4 +27,4 @@ jobs:
     - name: PlantUML CLI
       uses: lokkju/github-action-plantuml@v0.0.1
       with:
-        args: "user*/*.puml"
+        args: "user/*.puml"
